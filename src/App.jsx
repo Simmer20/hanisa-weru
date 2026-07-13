@@ -5,6 +5,8 @@ import Impact from "./components/Impact/Impact";
 import Engagement from "./components/Engagement/Engagement";
 import CaseStudies from "./components/CaseStudies/CaseStudies";
 import FAQ from "./components/FAQ/FAQ";
+import Footer from "./components/Footer/Footer";
+import CTA from "./components/Contact/CTA";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <Engagement />
       <CaseStudies />
       <FAQ/>
+      <CTA/>
+      <Footer />
     </>
   );
 }

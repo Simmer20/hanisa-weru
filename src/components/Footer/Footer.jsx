@@ -1,5 +1,5 @@
 import {
-  Linkedin,
+  //Linkedin,
   Mail,
   Globe,
 } from "lucide-react";
@@ -44,11 +44,11 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-5">
-
+{/* 
               <div className="flex items-center gap-3">
                 <Linkedin size={18} />
                 LinkedIn
-              </div>
+              </div> */}
 
               <div className="flex items-center gap-3">
                 <Mail size={18} />
@@ -67,8 +67,6 @@ export default function Footer() {
 
         <div className="border-t border-slate-700 mt-20 pt-8 flex justify-between text-sm">
           <p>© 2026 LynchPin Advisory. All rights reserved.</p>
-
-          <p>Built with purpose.</p>
         </div>
 
       </div>
