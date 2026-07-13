@@ -3,6 +3,7 @@ import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
 import Impact from "./components/Impact/Impact";
 import Engagement from "./components/Engagement/Engagement";
+import CaseStudies from "./components/CaseStudies/CaseStudies";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       <About />
       <Impact />
       <Engagement />
+      <CaseStudies />
+      <CaseStudies />
     </>
   );
 }
