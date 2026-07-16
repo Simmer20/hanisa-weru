@@ -174,7 +174,20 @@
   const toggleBtn = document.getElementById('theme-toggle');
   if (!toggleBtn) return;
   const icon = toggleBtn.querySelector('i');
-  let currentTheme = 'light';
+  const storageKey = 'lp-theme';
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getSystemTheme() {
+    return media.matches ? 'dark' : 'light';
+  }
+
+  function getInitialTheme() {
+    const saved = localStorage.getItem(storageKey);
+    if (saved === 'light' || saved === 'dark') return saved;
+    return getSystemTheme();
+  }
+
+  let currentTheme = getInitialTheme();
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -190,6 +203,15 @@
 
   toggleBtn.addEventListener('click', () => {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem(storageKey, currentTheme);
+    applyTheme(currentTheme);
+  });
+
+  media.addEventListener('change', () => {
+    const saved = localStorage.getItem(storageKey);
+    if (saved === 'light' || saved === 'dark') return;
+
+    currentTheme = getSystemTheme();
     applyTheme(currentTheme);
   });
 
