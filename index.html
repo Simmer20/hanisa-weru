@@ -18,7 +18,10 @@
 <!-- HEADER -->
 <header>
   <div class="container nav">
-    <div class="logo">Lynch<span>Pin</span></div>
+    <div class="logo-wrap">
+      <div class="logo">Hanisa <span>Weru</span></div>
+      <span class="logo-subtitle">LynchPin Advisory</span>
+    </div>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#about">Authority</a></li>
@@ -58,7 +61,10 @@
         <a href="#cta" class="btn btn-outline">Let’s talk</a>
       </div>
     </div>
-    <div id="hero-3d"></div>
+    <div>
+      <div id="hero-3d"></div>
+      <p class="globe-hint">Hover nodes to view country context. Click a node to highlight active markets and routes.</p>
+      </div>
   </div>
 </section>
 
@@ -111,14 +117,37 @@
   <div class="container">
     <span class="label section-label" style="display: block;">Trusted across sectors</span>
     <h2 class="section-title" style="font-size: 1.4rem;">Companies she's worked with</h2>
-    <div class="logos-strip">
-      <span class="logo-mark">ABSA</span>
-      <span class="logo-mark">NIC BANK</span>
-      <span class="logo-mark">EZRA / MODE</span>
-      <span class="logo-mark">SUN KING</span>
-      <span class="logo-mark">4LIFE SOLUTIONS</span>
-      <span class="logo-mark">CLOUD9 MONEY</span>
-      <span class="logo-mark">TECHSTARS</span>
+    <div class="partner-grid">
+      <div class="partner-card" data-company="Equity Bank">
+        <img src="https://thelynchpinadvisory.com/images/logo-equity.png" alt="Equity Bank" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="KCB">
+        <img src="https://thelynchpinadvisory.com/images/logo-kcb.png" alt="KCB" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="Airtel">
+        <img src="https://thelynchpinadvisory.com/images/logo-airtel.jpg" alt="Airtel" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="Inclusivity">
+        <img src="https://thelynchpinadvisory.com/images/logo-inclusivity.jpg" alt="Inclusivity" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="BBOXX">
+        <img src="https://thelynchpinadvisory.com/images/logo-bboxx.png" alt="BBOXX" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="SAWA">
+        <img src="https://thelynchpinadvisory.com/images/logo-SAWA.jpg" alt="SAWA" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="Verst Carbon">
+        <img src="https://thelynchpinadvisory.com/images/logo-verst.png" alt="Verst Carbon" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="Signvrse">
+        <img src="https://thelynchpinadvisory.com/images/logo-signvrse.png" alt="Signvrse" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="StarTimes">
+        <img src="https://thelynchpinadvisory.com/images/logo-startimes.png" alt="StarTimes" loading="lazy" />
+      </div>
+      <div class="partner-card" data-company="ITM Africa">
+        <img src="https://thelynchpinadvisory.com/images/logo-itm.jpg" alt="ITM Africa" loading="lazy" />
+      </div>
     </div>
   </div>
 </section>
@@ -128,32 +157,63 @@
   <div class="container">
     <span class="label section-label">Gallery</span>
     <h2 class="section-title">Hanisa in the field</h2>
-    <p class="section-sub">Placeholder frames for now — swap in real photography whenever it's ready.</p>
-    <div class="gallery-grid">
-      <div class="gallery-tile tile-large" style="--tile-a:#214E7A; --tile-b:#0E2A47;">
-        <span class="tile-tag">Placeholder</span>
-        <div class="tile-icon"><i class="fas fa-user"></i></div>
-        <span class="tile-label">Executive portrait</span>
+    <div class="founder-profile">
+      <div class="founder-photo-col">
+        <div class="founder-slider founder-main-gallery" data-autoplay="true" data-interval="4200" aria-label="Founder photo gallery">
+          <div class="founder-slider-track">
+            <article class="founder-slide active" data-slide-index="0">
+              <img src="Images/Founder-photo.jpeg" alt="Hanisa Weru, Founder of LynchPin" loading="lazy" />
+            </article>
+            <article class="founder-slide" data-slide-index="1">
+              <img src="Images/Founder-photo2.jpeg" alt="Hanisa Weru in a client engagement setting" loading="lazy" />
+            </article>
+            <article class="founder-slide" data-slide-index="2">
+              <img src="Images/Founder-photo3.jpeg" alt="Hanisa Weru speaking at an event" loading="lazy" />
+            </article>
+            <article class="founder-slide" data-slide-index="3">
+              <img src="Images/Hanisa-Ethiopia.jpg" alt="Hanisa Weru in strategic partnership discussions" loading="lazy" />
+            </article>
+          </div>
+          <button class="founder-slider-btn prev" type="button" aria-label="Show previous founder photo">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button class="founder-slider-btn next" type="button" aria-label="Show next founder photo">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+          <div class="founder-slider-dots" role="tablist" aria-label="Founder gallery navigation">
+            <button class="founder-dot active" type="button" role="tab" aria-label="Show founder photo 1" aria-selected="true" data-slide="0"></button>
+            <button class="founder-dot" type="button" role="tab" aria-label="Show founder photo 2" aria-selected="false" data-slide="1"></button>
+            <button class="founder-dot" type="button" role="tab" aria-label="Show founder photo 3" aria-selected="false" data-slide="2"></button>
+            <button class="founder-dot" type="button" role="tab" aria-label="Show founder photo 4" aria-selected="false" data-slide="3"></button>
+          </div>
+        </div>
+        <div class="founder-exp-badge">18+ Years of Cross-Sector Experience</div>
       </div>
-      <div class="gallery-tile" style="--tile-a:#B68D40; --tile-b:#8F6C2F;">
-        <span class="tile-tag">Placeholder</span>
-        <div class="tile-icon"><i class="fas fa-microphone-alt"></i></div>
-        <span class="tile-label">Keynote — Techstars NYC</span>
-      </div>
-      <div class="gallery-tile" style="--tile-a:#4E5968; --tile-b:#2C333C;">
-        <span class="tile-tag">Placeholder</span>
-        <div class="tile-icon"><i class="fas fa-users"></i></div>
-        <span class="tile-label">Panel — Africa Fintech Summit</span>
-      </div>
-      <div class="gallery-tile" style="--tile-a:#6FA25C; --tile-b:#3F5F35;">
-        <span class="tile-tag">Placeholder</span>
-        <div class="tile-icon"><i class="fas fa-solar-panel"></i></div>
-        <span class="tile-label">Site visit — clean energy infrastructure</span>
-      </div>
-      <div class="gallery-tile" style="--tile-a:#D4B06A; --tile-b:#A3823F;">
-        <span class="tile-tag">Placeholder</span>
-        <div class="tile-icon"><i class="fas fa-handshake"></i></div>
-        <span class="tile-label">Boardroom — strategic advisory</span>
+
+      <div class="field-gallery">
+        <div class="field-card">
+          <img src="Images/Kofisi-pic.jpeg" alt="Conference representation" class="field-image" loading="lazy" />
+          <div class="field-content">
+            <h4>Host at Kofisi — eGov &amp; Digital Public Infrastructure</h4>
+            <p>Expertise in National ID programs, MOSIP-based implementations, trust frameworks, and banking/financial inclusion ecosystems across Africa.</p>
+          </div>
+        </div>
+
+        <div class="field-card">
+          <img src="Images/sunking-4.jpg" alt="Business networking" class="field-image" loading="lazy" />
+          <div class="field-content">
+            <h4>Panel Host — Sunking Solar Inverter Launch</h4>
+            <p>Hanisa moderated the panel discussion at the launch of SunKing's new solar inverter business line in Africa.</p>
+          </div>
+        </div>
+
+        <div class="field-card">
+          <img src="Images/SAWA.jpeg" alt="Conference pitch representation" class="field-image" loading="lazy" />
+          <div class="field-content">
+            <h4>Conference Pitch — Accra, Ghana</h4>
+            <p>With the Ministry of Foreign Affairs to pitch the SAWA Can and Bag for clean water access.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -162,29 +222,29 @@
 <!-- ENGAGEMENTS (services renamed) -->
 <section id="engagements" style="background: var(--warm-white);">
   <div class="container">
-    <span class="label section-label">Strategic engagements</span>
-    <h2 class="section-title">How we work with executives</h2>
-    <p class="section-sub">Partnerships that drive market leadership, commercial scale and institutional credibility.</p>
+    <span class="label section-label">Ways to partner with us</span>
+    <h2 class="section-title">Service lanes that match your growth ambition</h2>
+    <p class="section-sub">From market entry to sustainability strategy and speaking engagements, each service is designed to move from insight to execution.</p>
     <div class="engagement-grid">
       <div class="engagement-card">
-        <i class="fas fa-bullseye"></i>
-        <h4>Executive Advisory</h4>
-        <p>One‑on‑one strategic counsel for CEOs, founders and boards navigating complex African markets.</p>
+        <i class="fas fa-compass"></i>
+        <h4>Consulting Plans</h4>
+        <p>Foundation, Growth and Enterprise advisory to sharpen strategy, open the right doors and accelerate market entry with confidence.</p>
       </div>
       <div class="engagement-card">
-        <i class="fas fa-layer-group"></i>
-        <h4>Commercial Capability</h4>
-        <p>Equip your leadership team with B2B2C frameworks, partnership architecture and market entry playbooks.</p>
+        <i class="fas fa-leaf"></i>
+        <h4>Sustainability Advisory</h4>
+        <p>Tailored support for clean energy, clean water and carbon market initiatives with fundable, execution-ready strategy.</p>
+      </div>
+      <div class="engagement-card">
+        <i class="fas fa-chart-line"></i>
+        <h4>US Consultancy Growth Support</h4>
+        <p>Hands-on lead generation, funnel design and go-to-market execution to strengthen pipeline velocity and conversion.</p>
       </div>
       <div class="engagement-card">
         <i class="fas fa-microphone-alt"></i>
-        <h4>Keynotes & Executive Forums</h4>
-        <p>Inspire and align audiences with actionable insights from 22 markets, carbon finance and fintech‑energy convergence.</p>
-      </div>
-      <div class="engagement-card">
-        <i class="fas fa-handshake"></i>
-        <h4>Strategic Growth Partnerships</h4>
-        <p>Long‑term advisory mandates for DFIs, global corporations and growth‑stage platforms entering Africa.</p>
+        <h4>Speaking & Events</h4>
+        <p>High-impact talks and moderated sessions on AI, sustainability, climate finance and inclusive innovation.</p>
       </div>
     </div>
   </div>
@@ -194,65 +254,65 @@
 <section id="rates">
   <div class="container">
     <span class="label section-label">Investment</span>
-    <h2 class="section-title">Rate card</h2>
-    <p class="section-sub">Every mandate is scoped to the market, the stakes and the outcome — so rates are quoted individually rather than fixed. Here's how engagements are structured.</p>
+    <h2 class="section-title">Consulting plan structures</h2>
+    <p class="section-sub">Choose the support tier that fits your stage. Final pricing is scoped per market complexity, travel and execution depth.</p>
     <div class="rate-grid">
       <div class="rate-card">
         <div class="rate-card-head">
           <i class="fas fa-compass"></i>
-          <h3>Executive Advisory Retainer</h3>
-          <p>Ongoing counsel for CEOs, founders and boards navigating complex markets.</p>
+          <h3>Foundation Plan</h3>
+          <p>For teams defining their market-entry roadmap and first strategic partnerships.</p>
         </div>
         <ul class="rate-includes">
-          <li>Monthly strategic sessions</li>
-          <li>Direct access between sessions</li>
-          <li>Partnership & GTM review</li>
-          <li>Quarterly board‑ready reporting</li>
+          <li>Market diagnosis and opportunity mapping</li>
+          <li>Core go-to-market strategy sprint</li>
+          <li>Partnership prioritization framework</li>
+          <li>90-day execution action plan</li>
         </ul>
         <div class="rate-quote">
           <span class="rate-quote-label">Investment</span>
-          <span class="rate-quote-value">Custom quote</span>
+          <span class="rate-quote-value">From 900 / 5 days</span>
         </div>
-        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+        <a href="https://calendly.com/thelynchpinconsultants" target="_blank" rel="noopener" class="btn btn-outline rate-cta">Book discovery call</a>
       </div>
       <div class="rate-card">
         <div class="rate-card-head">
-          <i class="fas fa-microphone-alt"></i>
-          <h3>Keynotes & Executive Forums</h3>
-          <p>A single high‑impact engagement for a summit, offsite or investor forum.</p>
+          <i class="fas fa-rocket"></i>
+          <h3>Growth Plan</h3>
+          <p>For organizations scaling across markets with deeper execution support and advisory cadence.</p>
         </div>
         <ul class="rate-includes">
-          <li>Custom‑built talk or fireside chat</li>
-          <li>Pre‑event briefing with organisers</li>
-          <li>Audience Q&A moderation</li>
-          <li>Travel scoped by market</li>
+          <li>Everything in Foundation, plus execution support</li>
+          <li>Pipeline and funnel performance tuning</li>
+          <li>Strategic partnership outreach playbook</li>
+          <li>Monthly leadership advisory sessions</li>
         </ul>
         <div class="rate-quote">
           <span class="rate-quote-label">Investment</span>
-          <span class="rate-quote-value">Custom quote</span>
+          <span class="rate-quote-value">From 1600 / month (6 months)</span>
         </div>
-        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+        <a href="https://calendly.com/thelynchpinconsultants" target="_blank" rel="noopener" class="btn btn-outline rate-cta">Book growth call</a>
       </div>
       <div class="rate-card">
         <div class="rate-card-head">
           <i class="fas fa-handshake"></i>
-          <h3>Strategic Growth Partnership</h3>
-          <p>A long‑term mandate for DFIs, corporates and platforms entering Africa.</p>
+          <h3>Enterprise Plan</h3>
+          <p>For DFIs, corporates and multi-market mandates requiring embedded strategic partnership leadership.</p>
         </div>
         <ul class="rate-includes">
-          <li>Multi‑market entry strategy</li>
-          <li>Partnership architecture & sourcing</li>
-          <li>Embedded advisory cadence</li>
-          <li>Milestone‑based reviews</li>
+          <li>Everything in Growth, with executive-level support</li>
+          <li>Cross-border market and policy navigation</li>
+          <li>Institutional and capital partner engagement</li>
+          <li>Quarterly board-ready strategic reporting</li>
         </ul>
         <div class="rate-quote">
           <span class="rate-quote-label">Investment</span>
-          <span class="rate-quote-value">Custom quote</span>
+          <span class="rate-quote-value">From 3000 / month (1 year)</span>
         </div>
-        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+        <a href="https://calendly.com/thelynchpinconsultants" target="_blank" rel="noopener" class="btn btn-outline rate-cta">Book enterprise call</a>
       </div>
     </div>
-    <p class="rate-note">Rates are tailored to scope, market complexity and engagement length. Long‑term and multi‑market mandates are considered on a bespoke basis — reach out for a confidential conversation.</p>
+    <p class="rate-note">Need a speaking engagement or sustainability advisory sprint? We also scope stand-alone speaking and thematic advisory packages.</p>
   </div>
 </section>
 
@@ -283,7 +343,8 @@
       <span class="label" style="color: var(--gold-light);">Ecosystem convergence</span>
       <h2>Connecting sectors, scaling impact</h2>
       <p class="subhead">Banking · Fintech · Clean energy · Infrastructure · Carbon markets — one integrated advisory framework.</p>
-    </div>
+      <!-- <p class="network-context">The graph below translates strategy into a systems view: each node is a sector capability, and each edge represents how decisions in one area influence outcomes in another.</p>
+    </div> -->
     <div id="network-3d-container"></div>
   </div>
 </section>
@@ -291,11 +352,11 @@
 <!-- FINAL CTA with particle Three.js -->
 <section id="cta-3d-section">
   <div class="container">
-    <div class="cta-content">
+    <div class="cta-content" id="cta">
       <span class="label" style="color: rgba(255,255,255,0.7);">Begin the conversation</span>
       <h2>Own the convergence.</h2>
       <p class="subhead">Let’s build the category together. Reach out for a confidential exploration of how LynchPin can accelerate your Africa strategy.</p>
-      <a href="#" class="btn" style="background: white; color: var(--navy);">Connect with Hanisa</a>
+      <a href="https://calendly.com/thelynchpinconsultants" target="_blank" rel="noopener" class="btn" style="background: white; color: var(--navy);">Book your 30-minute strategy call</a>
     </div>
     <div id="cta-3d-container"></div>
   </div>
@@ -306,7 +367,10 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo">Lynch<span>Pin</span></div>
+        <div class="logo-wrap">
+          <div class="logo">Hanisa <span>Weru</span></div>
+          <span class="logo-subtitle">LynchPin Advisory</span>
+        </div>
         <p style="margin-top: 0.5rem; max-width: 260px;">Boutique advisory for Africa’s convergence economy.</p>
       </div>
       <div class="footer-links">
