@@ -425,8 +425,17 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 60px;
+  align-items: center;
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 620px;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -510,6 +519,8 @@ body.nav-open .nav-toggle span:nth-child(3) {
   font-size: 0.78rem;
   color: var(--slate);
   letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 620px;
 }
 
 .coverage-grid {
@@ -517,6 +528,7 @@ body.nav-open .nav-toggle span:nth-child(3) {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
+  width: 100%;
 }
 
 .coverage-card {
@@ -554,7 +566,7 @@ body.nav-open .nav-toggle span:nth-child(3) {
 }
 
 .world-map {
-  width: 100%;
+  width: min(100%, 620px);
   height: 480px;
   border-radius: 14px;
   background: radial-gradient(circle at 30% 20%, rgba(200,164,106,0.1), rgba(13,27,42,0.96) 55%);
@@ -1359,6 +1371,10 @@ footer {
   .hero-grid, .about-grid {
     grid-template-columns: 1fr;
   }
+  .hero-visual {
+    max-width: 720px;
+    margin: 0 auto;
+  }
   .nav-right {
     width: auto;
     position: relative;
@@ -1422,6 +1438,9 @@ footer {
   #hero-3d {
     height: 360px;
   }
+  .world-map {
+    height: 360px;
+  }
   .coverage-grid {
     grid-template-columns: 1fr;
   }
@@ -1464,6 +1483,7 @@ footer {
   .partner-card { min-height: 78px; }
   .logo-subtitle { font-size: 0.58rem; }
   #hero-3d { height: 260px; }
+  .world-map { height: 260px; }
   #network-3d-container { height: 260px; }
 }
 
