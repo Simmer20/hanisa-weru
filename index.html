@@ -1,16 +1,341 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hanisa-weru</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hanisa W. Weru · Go‑to‑Market Authority</title>
+  <!-- Google Fonts (clean, executive) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Site stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container nav">
+    <div class="logo">Lynch<span>Pin</span></div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">Authority</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#engagements">Engagements</a></li>
+        <li><a href="#rates">Rate Card</a></li>
+        <li><a href="#cta" class="nav-cta">Connect</a></li>
+      </ul>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO with Three.js Globe -->
+<section id="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="label"><i class="fas fa-bolt" style="margin-right: 6px;"></i> Go‑to‑Market Authority</span>
+      <h1>
+        Hanisa W. Weru<br />
+        <span class="highlight">Africa’s convergence</span> strategist
+      </h1>
+      <p class="subhead" style="max-width: 560px;">
+        Building go‑to‑market strategies that scale organisations across Africa’s
+        <strong>fintech · clean energy · infrastructure</strong> nexus.
+      </p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><i class="fas fa-globe-africa"></i> 22+ markets</span>
+        <span class="hero-meta-item"><i class="fas fa-handshake"></i> $20M+ portfolio</span>
+        <span class="hero-meta-item"><i class="fas fa-leaf"></i> Carbon‑credit pioneer</span>
+        <span class="hero-meta-item"><i class="fas fa-rocket"></i> Techstars NYC ‘25</span>
+      </div>
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="#engagements" class="btn">Strategic engagements</a>
+        <a href="#cta" class="btn btn-outline">Let’s talk</a>
+      </div>
+    </div>
+    <div id="hero-3d"></div>
+  </div>
+</section>
+
+<!-- ABOUT – Authority narrative -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="label"><i class="fas fa-crown" style="margin-right: 6px;"></i> The Quintuple Differentiator</span>
+        <h2>One of Africa’s leading<br />Go‑to‑Market authorities</h2>
+        <p style="color: var(--slate); font-size: 1.1rem; line-height: 1.8; max-width: 560px;">
+          Hanisa Weru is a <strong>Go‑to‑Market Authority</strong> and founder of LynchPin Advisory.
+          She partners with executive teams, investors, development institutions and growth‑stage
+          organisations to design commercial strategies, build high‑value partnerships and
+          accelerate market expansion across Africa’s fastest‑growing sectors.
+        </p>
+        <div class="about-stat-grid">
+          <div class="stat-item">
+            <div class="stat-number">18+</div>
+            <div class="stat-label">Years commercial leadership</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">22</div>
+            <div class="stat-label">Markets scaled (fintech)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">$20M+</div>
+            <div class="stat-label">Annual partnership portfolio</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1st</div>
+            <div class="stat-label">Carbon‑credit infrastructure model</div>
+          </div>
+        </div>
+      </div>
+      <div style="background: var(--warm-white); padding: 2.5rem; border-radius: 24px; box-shadow: 0 8px 32px var(--card-shadow); border: 1px solid var(--border-subtle);">
+        <h3 style="color: var(--gold); font-family: 'Instrument Serif', serif; font-size: 2rem; font-weight: 400;">“The intersection is the product.”</h3>
+        <p style="margin-top: 1.2rem; color: var(--slate);">
+          <span style="font-weight: 600; color: var(--heading);">Banking · Fintech · Clean energy · Infrastructure · Carbon finance</span><br />
+          Hanisa holds five credentials that individually are impressive. Together they are category‑defining.
+          No other African commercial leader holds all five simultaneously.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY / LOGOS -->
+<section id="logos">
+  <div class="container">
+    <span class="label section-label" style="display: block;">Trusted across sectors</span>
+    <h2 class="section-title" style="font-size: 1.4rem;">Companies she's worked with</h2>
+    <div class="logos-strip">
+      <span class="logo-mark">ABSA</span>
+      <span class="logo-mark">NIC BANK</span>
+      <span class="logo-mark">EZRA / MODE</span>
+      <span class="logo-mark">SUN KING</span>
+      <span class="logo-mark">4LIFE SOLUTIONS</span>
+      <span class="logo-mark">CLOUD9 MONEY</span>
+      <span class="logo-mark">TECHSTARS</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <span class="label section-label">Gallery</span>
+    <h2 class="section-title">Hanisa in the field</h2>
+    <p class="section-sub">Placeholder frames for now — swap in real photography whenever it's ready.</p>
+    <div class="gallery-grid">
+      <div class="gallery-tile tile-large" style="--tile-a:#214E7A; --tile-b:#0E2A47;">
+        <span class="tile-tag">Placeholder</span>
+        <div class="tile-icon"><i class="fas fa-user"></i></div>
+        <span class="tile-label">Executive portrait</span>
+      </div>
+      <div class="gallery-tile" style="--tile-a:#B68D40; --tile-b:#8F6C2F;">
+        <span class="tile-tag">Placeholder</span>
+        <div class="tile-icon"><i class="fas fa-microphone-alt"></i></div>
+        <span class="tile-label">Keynote — Techstars NYC</span>
+      </div>
+      <div class="gallery-tile" style="--tile-a:#4E5968; --tile-b:#2C333C;">
+        <span class="tile-tag">Placeholder</span>
+        <div class="tile-icon"><i class="fas fa-users"></i></div>
+        <span class="tile-label">Panel — Africa Fintech Summit</span>
+      </div>
+      <div class="gallery-tile" style="--tile-a:#6FA25C; --tile-b:#3F5F35;">
+        <span class="tile-tag">Placeholder</span>
+        <div class="tile-icon"><i class="fas fa-solar-panel"></i></div>
+        <span class="tile-label">Site visit — clean energy infrastructure</span>
+      </div>
+      <div class="gallery-tile" style="--tile-a:#D4B06A; --tile-b:#A3823F;">
+        <span class="tile-tag">Placeholder</span>
+        <div class="tile-icon"><i class="fas fa-handshake"></i></div>
+        <span class="tile-label">Boardroom — strategic advisory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS (services renamed) -->
+<section id="engagements" style="background: var(--warm-white);">
+  <div class="container">
+    <span class="label section-label">Strategic engagements</span>
+    <h2 class="section-title">How we work with executives</h2>
+    <p class="section-sub">Partnerships that drive market leadership, commercial scale and institutional credibility.</p>
+    <div class="engagement-grid">
+      <div class="engagement-card">
+        <i class="fas fa-bullseye"></i>
+        <h4>Executive Advisory</h4>
+        <p>One‑on‑one strategic counsel for CEOs, founders and boards navigating complex African markets.</p>
+      </div>
+      <div class="engagement-card">
+        <i class="fas fa-layer-group"></i>
+        <h4>Commercial Capability</h4>
+        <p>Equip your leadership team with B2B2C frameworks, partnership architecture and market entry playbooks.</p>
+      </div>
+      <div class="engagement-card">
+        <i class="fas fa-microphone-alt"></i>
+        <h4>Keynotes & Executive Forums</h4>
+        <p>Inspire and align audiences with actionable insights from 22 markets, carbon finance and fintech‑energy convergence.</p>
+      </div>
+      <div class="engagement-card">
+        <i class="fas fa-handshake"></i>
+        <h4>Strategic Growth Partnerships</h4>
+        <p>Long‑term advisory mandates for DFIs, global corporations and growth‑stage platforms entering Africa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE CARD -->
+<section id="rates">
+  <div class="container">
+    <span class="label section-label">Investment</span>
+    <h2 class="section-title">Rate card</h2>
+    <p class="section-sub">Every mandate is scoped to the market, the stakes and the outcome — so rates are quoted individually rather than fixed. Here's how engagements are structured.</p>
+    <div class="rate-grid">
+      <div class="rate-card">
+        <div class="rate-card-head">
+          <i class="fas fa-compass"></i>
+          <h3>Executive Advisory Retainer</h3>
+          <p>Ongoing counsel for CEOs, founders and boards navigating complex markets.</p>
+        </div>
+        <ul class="rate-includes">
+          <li>Monthly strategic sessions</li>
+          <li>Direct access between sessions</li>
+          <li>Partnership & GTM review</li>
+          <li>Quarterly board‑ready reporting</li>
+        </ul>
+        <div class="rate-quote">
+          <span class="rate-quote-label">Investment</span>
+          <span class="rate-quote-value">Custom quote</span>
+        </div>
+        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+      </div>
+      <div class="rate-card">
+        <div class="rate-card-head">
+          <i class="fas fa-microphone-alt"></i>
+          <h3>Keynotes & Executive Forums</h3>
+          <p>A single high‑impact engagement for a summit, offsite or investor forum.</p>
+        </div>
+        <ul class="rate-includes">
+          <li>Custom‑built talk or fireside chat</li>
+          <li>Pre‑event briefing with organisers</li>
+          <li>Audience Q&A moderation</li>
+          <li>Travel scoped by market</li>
+        </ul>
+        <div class="rate-quote">
+          <span class="rate-quote-label">Investment</span>
+          <span class="rate-quote-value">Custom quote</span>
+        </div>
+        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+      </div>
+      <div class="rate-card">
+        <div class="rate-card-head">
+          <i class="fas fa-handshake"></i>
+          <h3>Strategic Growth Partnership</h3>
+          <p>A long‑term mandate for DFIs, corporates and platforms entering Africa.</p>
+        </div>
+        <ul class="rate-includes">
+          <li>Multi‑market entry strategy</li>
+          <li>Partnership architecture & sourcing</li>
+          <li>Embedded advisory cadence</li>
+          <li>Milestone‑based reviews</li>
+        </ul>
+        <div class="rate-quote">
+          <span class="rate-quote-label">Investment</span>
+          <span class="rate-quote-value">Custom quote</span>
+        </div>
+        <a href="#cta" class="btn btn-outline rate-cta">Request a quote</a>
+      </div>
+    </div>
+    <p class="rate-note">Rates are tailored to scope, market complexity and engagement length. Long‑term and multi‑market mandates are considered on a bespoke basis — reach out for a confidential conversation.</p>
+  </div>
+</section>
+
+<!-- WHO WE ADVISE -->
+<section id="audience" style="background: var(--bg);">
+  <div class="container">
+    <span class="label section-label">Who we advise</span>
+    <h2 class="section-title">Partners in growth</h2>
+    <p class="section-sub">We work alongside decision‑makers who shape markets and scale impact.</p>
+    <div class="audience-grid">
+      <span class="audience-tag">CEOs</span>
+      <span class="audience-tag">Founders</span>
+      <span class="audience-tag">Executive Teams</span>
+      <span class="audience-tag">Boards</span>
+      <span class="audience-tag">DFIs</span>
+      <span class="audience-tag">Investors</span>
+      <span class="audience-tag">Government Leaders</span>
+      <span class="audience-tag">Corporate Innovation</span>
+      <span class="audience-tag">High‑Growth Businesses</span>
+    </div>
+  </div>
+</section>
+
+<!-- 3D NETWORK VISUAL (Three.js) -->
+<section id="network-3d-section">
+  <div class="container">
+    <div class="network-text">
+      <span class="label" style="color: var(--gold-light);">Ecosystem convergence</span>
+      <h2>Connecting sectors, scaling impact</h2>
+      <p class="subhead">Banking · Fintech · Clean energy · Infrastructure · Carbon markets — one integrated advisory framework.</p>
+    </div>
+    <div id="network-3d-container"></div>
+  </div>
+</section>
+
+<!-- FINAL CTA with particle Three.js -->
+<section id="cta-3d-section">
+  <div class="container">
+    <div class="cta-content">
+      <span class="label" style="color: rgba(255,255,255,0.7);">Begin the conversation</span>
+      <h2>Own the convergence.</h2>
+      <p class="subhead">Let’s build the category together. Reach out for a confidential exploration of how LynchPin can accelerate your Africa strategy.</p>
+      <a href="#" class="btn" style="background: white; color: var(--navy);">Connect with Hanisa</a>
+    </div>
+    <div id="cta-3d-container"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Lynch<span>Pin</span></div>
+        <p style="margin-top: 0.5rem; max-width: 260px;">Boutique advisory for Africa’s convergence economy.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <strong style="color: white;">Engage</strong>
+          <a href="#engagements">Advisory</a>
+          <a href="#rates">Rate card</a>
+          <a href="#engagements">Keynotes</a>
+        </div>
+        <div>
+          <strong style="color: white;">Authority</strong>
+          <a href="#about">Profile</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#audience">Audience</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 LynchPin Advisory. All rights reserved.</span>
+      <span>Nairobi · Pan‑Africa · Global</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Three.js + GSAP/ScrollTrigger (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Site script -->
+<script src="script.js"></script>
+</body>
 </html>
