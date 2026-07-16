@@ -68,18 +68,44 @@ const HERO_BG_DARK = 0x16283D;
   // sphere
   const radius = 3.2;
   const segments = 48;
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.setCrossOrigin('anonymous');
+
+  const earthDayMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
+  const earthNormalMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
+  const earthSpecularMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_specular_2048.jpg');
+
+  earthDayMap.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  earthDayMap.colorSpace = THREE.SRGBColorSpace;
+
   const sphereGeo = new THREE.SphereGeometry(radius, segments, segments);
   const sphereMat = new THREE.MeshPhongMaterial({
-    color: 0x214E7A,
-    emissive: 0x0E2A47,
-    emissiveIntensity: 0.15,
+    color: 0xffffff,
+    map: earthDayMap,
+    normalMap: earthNormalMap,
+    normalScale: new THREE.Vector2(0.75, 0.75),
+    specularMap: earthSpecularMap,
+    specular: new THREE.Color(0x324657),
+    emissive: 0x10213B,
+    emissiveIntensity: 0.08,
     transparent: true,
-    opacity: 0.65,
+    opacity: 0.96,
     wireframe: false,
-    shininess: 20,
+    shininess: 18,
   });
   const sphere = new THREE.Mesh(sphereGeo, sphereMat);
   group.add(sphere);
+
+  const cloudMap = textureLoader.load('https://threejs.org/examples/textures/planets/earth_clouds_1024.png');
+  const cloudGeo = new THREE.SphereGeometry(radius * 1.012, 48, 48);
+  const cloudMat = new THREE.MeshLambertMaterial({
+    map: cloudMap,
+    transparent: true,
+    opacity: 0.28,
+    depthWrite: false,
+  });
+  const clouds = new THREE.Mesh(cloudGeo, cloudMat);
+  group.add(clouds);
 
   // wireframe overlay
   const wireGeo = new THREE.SphereGeometry(radius * 1.005, 28, 28);
@@ -87,10 +113,46 @@ const HERO_BG_DARK = 0x16283D;
     color: 0xB68D40,
     wireframe: true,
     transparent: true,
-    opacity: 0.2,
+    opacity: 0.09,
   });
   const wire = new THREE.Mesh(wireGeo, wireMat);
   group.add(wire);
+
+  const glowGeo = new THREE.SphereGeometry(radius * 1.065, 42, 42);
+  const glowMat = new THREE.MeshPhongMaterial({
+    color: 0x5B8DBF,
+    transparent: true,
+    opacity: 0.08,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  group.add(glow);
+
+  const starsGeo = new THREE.BufferGeometry();
+  const starCount = 550;
+  const starArray = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i++) {
+    const r = 24 + Math.random() * 22;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    starArray[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    starArray[i * 3 + 1] = r * Math.cos(phi);
+    starArray[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+  }
+  starsGeo.setAttribute('position', new THREE.BufferAttribute(starArray, 3));
+  const stars = new THREE.Points(
+    starsGeo,
+    new THREE.PointsMaterial({
+      color: 0xC9D7E4,
+      size: 0.06,
+      transparent: true,
+      opacity: 0.7,
+      depthWrite: false,
+    })
+  );
+  scene.add(stars);
 
   function latLonToVector3(lat, lon, r = radius + 0.05) {
     const phi = (90 - lat) * (Math.PI / 180);
@@ -102,100 +164,136 @@ const HERO_BG_DARK = 0x16283D;
     );
   }
 
-  function makeTextSprite(text, size = 92, bg = 'rgba(8,20,35,0.8)', fg = '#f6f7f8') {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 512;
-    canvas.height = 176;
+  const regionColors = {
+    Africa: 0xD4B06A,
+    'Middle East': 0x5EA8A2,
+    Europe: 0x93B4D6,
+    'United States': 0xF2D6A8,
+  };
 
-    ctx.fillStyle = bg;
-    ctx.beginPath();
-    ctx.roundRect(14, 14, canvas.width - 28, canvas.height - 28, 22);
-    ctx.fill();
-
-    ctx.fillStyle = fg;
-    ctx.font = '600 54px Inter';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.minFilter = THREE.LinearFilter;
-    const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
-    const sprite = new THREE.Sprite(material);
-    sprite.scale.set(size * 0.015, size * 0.0052, 1);
-    return sprite;
-  }
-
-  const countries = [
-    { name: 'Kenya', lat: -1.2864, lon: 36.8172 },
-    { name: 'Ghana', lat: 5.6037, lon: -0.1870 },
-    { name: 'Nigeria', lat: 9.0765, lon: 7.3986 },
-    { name: 'South Africa', lat: -26.2041, lon: 28.0473 },
-    { name: 'Egypt', lat: 30.0444, lon: 31.2357 },
-    { name: 'UAE', lat: 25.2048, lon: 55.2708 },
-    { name: 'Spain', lat: 40.4168, lon: -3.7038 },
-    { name: 'United Kingdom', lat: 51.5072, lon: -0.1276 },
-    { name: 'United States', lat: 40.7128, lon: -74.0060 }
+  const markets = [
+    { name: 'Kenya', region: 'Africa', lat: -1.2864, lon: 36.8172 },
+    { name: 'Ghana', region: 'Africa', lat: 5.6037, lon: -0.1870 },
+    { name: 'Nigeria', region: 'Africa', lat: 9.0765, lon: 7.3986 },
+    { name: 'South Africa', region: 'Africa', lat: -26.2041, lon: 28.0473 },
+    { name: 'Egypt', region: 'Africa', lat: 30.0444, lon: 31.2357 },
+    { name: 'Morocco', region: 'Africa', lat: 33.5731, lon: -7.5898 },
+    { name: 'Tunisia', region: 'Africa', lat: 36.8065, lon: 10.1815 },
+    { name: 'Ethiopia', region: 'Africa', lat: 8.9806, lon: 38.7578 },
+    { name: 'Tanzania', region: 'Africa', lat: -6.7924, lon: 39.2083 },
+    { name: 'Uganda', region: 'Africa', lat: 0.3476, lon: 32.5825 },
+    { name: 'Rwanda', region: 'Africa', lat: -1.9706, lon: 30.1044 },
+    { name: 'Zambia', region: 'Africa', lat: -15.3875, lon: 28.3228 },
+    { name: 'Zimbabwe', region: 'Africa', lat: -17.8252, lon: 31.0335 },
+    { name: 'Botswana', region: 'Africa', lat: -24.6282, lon: 25.9231 },
+    { name: 'Namibia', region: 'Africa', lat: -22.5609, lon: 17.0658 },
+    { name: 'Senegal', region: 'Africa', lat: 14.7167, lon: -17.4677 },
+    { name: 'Cote d\'Ivoire', region: 'Africa', lat: 5.3600, lon: -4.0083 },
+    { name: 'Cameroon', region: 'Africa', lat: 3.8480, lon: 11.5021 },
+    { name: 'DR Congo', region: 'Africa', lat: -4.4419, lon: 15.2663 },
+    { name: 'Angola', region: 'Africa', lat: -8.8383, lon: 13.2344 },
+    { name: 'Algeria', region: 'Africa', lat: 36.7538, lon: 3.0588 },
+    { name: 'Mozambique', region: 'Africa', lat: -25.9692, lon: 32.5732 },
+    { name: 'Dubai', region: 'Middle East', lat: 25.2048, lon: 55.2708 },
+    { name: 'Kuwait', region: 'Middle East', lat: 29.3759, lon: 47.9774 },
+    { name: 'Qatar', region: 'Middle East', lat: 25.2854, lon: 51.5310 },
+    { name: 'Spain', region: 'Europe', lat: 40.4168, lon: -3.7038 },
+    { name: 'London', region: 'Europe', lat: 51.5072, lon: -0.1276 },
+    { name: 'Denmark', region: 'Europe', lat: 55.6761, lon: 12.5683 },
+    { name: 'New York', region: 'United States', lat: 40.7128, lon: -74.0060 },
+    { name: 'Washington DC', region: 'United States', lat: 38.9072, lon: -77.0369 },
+    { name: 'Baltimore', region: 'United States', lat: 39.2904, lon: -76.6122 },
+    { name: 'Delaware', region: 'United States', lat: 39.7447, lon: -75.5484 },
   ];
 
   const nodeMeshes = [];
   const pulseOffsets = [];
-  const nodeGeo = new THREE.SphereGeometry(0.11, 14, 14);
+  const nodeGeo = new THREE.SphereGeometry(0.09, 12, 12);
+  const heatmapMeshes = [];
+  const nodeIndex = new Map();
+  let activeRegion = null;
 
-  countries.forEach((country, i) => {
-    const pos = latLonToVector3(country.lat, country.lon);
+  markets.forEach((market, i) => {
+    const pos = latLonToVector3(market.lat, market.lon);
+    const color = regionColors[market.region] || 0xD4B06A;
     const node = new THREE.Mesh(
       nodeGeo,
       new THREE.MeshStandardMaterial({
-        color: 0xF7F5F2,
-        emissive: 0xD4B06A,
-        emissiveIntensity: 0.35,
+        color,
+        emissive: color,
+        emissiveIntensity: 0.42,
       })
     );
 
     node.position.copy(pos);
-    node.userData = { ...country, baseScale: 1 };
+    node.userData = { ...market, baseScale: 1 };
     group.add(node);
     nodeMeshes.push(node);
-    pulseOffsets.push(i * 0.8);
+    nodeIndex.set(market.name, node);
+    pulseOffsets.push(i * 0.41);
 
     const pinLine = new THREE.BufferGeometry().setFromPoints([
-      pos.clone().multiplyScalar(0.92),
-      pos.clone()
+      pos.clone().multiplyScalar(0.95),
+      pos.clone(),
     ]);
-    group.add(new THREE.Line(pinLine, new THREE.LineBasicMaterial({ color: 0xB68D40, transparent: true, opacity: 0.38 })));
-
-    const countryLabel = makeTextSprite(country.name, 74, 'rgba(10,22,38,0.72)', '#EDE4D2');
-    countryLabel.position.copy(pos.clone().multiplyScalar(1.12));
-    group.add(countryLabel);
+    group.add(
+      new THREE.Line(
+        pinLine,
+        new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.3 })
+      )
+    );
   });
 
-  const routes = [
-    { from: 'Kenya', to: 'Ghana' },
-    { from: 'Kenya', to: 'UAE' },
-    { from: 'Ghana', to: 'United Kingdom' },
-    { from: 'Nigeria', to: 'United States' },
-    { from: 'South Africa', to: 'Spain' },
-    { from: 'Egypt', to: 'UAE' }
+  const hotspotDefs = [
+    { name: 'Kenya', intensity: 1.0, tint: 0xFF4D4D },
+    { name: 'Nigeria', intensity: 0.92, tint: 0xFF3838 },
+    { name: 'Egypt', intensity: 0.88, tint: 0xFF5454 },
+    { name: 'South Africa', intensity: 0.84, tint: 0xFF5C5C },
+    { name: 'London', intensity: 0.76, tint: 0xFF7070 },
+    { name: 'Spain', intensity: 0.68, tint: 0xFF7A7A },
+    { name: 'Dubai', intensity: 1.0, tint: 0xFF1F1F },
+    { name: 'Qatar', intensity: 0.9, tint: 0xFF2A2A },
+    { name: 'Kuwait', intensity: 0.86, tint: 0xFF3434 },
   ];
 
-  routes.forEach((route) => {
-    const fromNode = nodeMeshes.find((node) => node.userData.name === route.from);
-    const toNode = nodeMeshes.find((node) => node.userData.name === route.to);
-    if (!fromNode || !toNode) return;
+  hotspotDefs.forEach((spot, i) => {
+    const node = nodeIndex.get(spot.name);
+    if (!node) return;
 
-    const arcMid = fromNode.position.clone().add(toNode.position).multiplyScalar(0.5).normalize().multiplyScalar(radius + 1.05);
-    const curve = new THREE.QuadraticBezierCurve3(fromNode.position.clone(), arcMid, toNode.position.clone());
-    const points = curve.getPoints(34);
-    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xD4B06A, transparent: true, opacity: 0.4 });
-    const line = new THREE.Line(lineGeometry, lineMaterial);
-    group.add(line);
+    const ring = new THREE.Mesh(
+      new THREE.CircleGeometry(0.14 + spot.intensity * 0.055, 40),
+      new THREE.MeshBasicMaterial({
+        color: spot.tint,
+        transparent: true,
+        opacity: 0.36,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      })
+    );
 
-    const connectionLabel = makeTextSprite('Interconnection', 60, 'rgba(12, 26, 44, 0.72)', '#FFFFFF');
-    connectionLabel.position.copy(curve.getPoint(0.52));
-    group.add(connectionLabel);
+    ring.position.copy(node.position.clone().multiplyScalar(1.012));
+    ring.lookAt(new THREE.Vector3(0, 0, 0));
+    ring.rotateX(Math.PI);
+    group.add(ring);
+
+    const core = new THREE.Mesh(
+      new THREE.CircleGeometry(0.06 + spot.intensity * 0.03, 28),
+      new THREE.MeshBasicMaterial({
+        color: 0xFFB3B3,
+        transparent: true,
+        opacity: 0.62,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      })
+    );
+    core.position.copy(node.position.clone().multiplyScalar(1.018));
+    core.lookAt(new THREE.Vector3(0, 0, 0));
+    core.rotateX(Math.PI);
+    group.add(core);
+
+    heatmapMeshes.push({ ring, core, region: node.userData.region, intensity: spot.intensity, offset: i * 0.61 });
   });
 
   function setTooltip(node, clientX, clientY) {
@@ -204,7 +302,7 @@ const HERO_BG_DARK = 0x16283D;
       return;
     }
 
-    tooltip.innerHTML = `<strong>${node.userData.name}</strong>Connected country node`;
+    tooltip.innerHTML = `<strong>${node.userData.name}</strong>${node.userData.region} coverage node`;
     const bounds = container.getBoundingClientRect();
     const x = clientX - bounds.left;
     const y = clientY - bounds.top;
@@ -275,6 +373,7 @@ const HERO_BG_DARK = 0x16283D;
 
   container.addEventListener('click', () => {
     if (dragMoved || !hoveredNode) return;
+    activeRegion = activeRegion === hoveredNode.userData.region ? null : hoveredNode.userData.region;
     gsap.fromTo(
       hoveredNode.scale,
       { x: 1, y: 1, z: 1 },
@@ -300,11 +399,30 @@ const HERO_BG_DARK = 0x16283D;
 
     group.rotation.y += (targetRotY - group.rotation.y) * 0.028;
     group.rotation.x += (targetRotX - group.rotation.x) * 0.03;
+    sphere.rotation.y += 0.0009;
+    clouds.rotation.y += 0.00125;
+
+    stars.rotation.y += 0.00015;
 
     nodeMeshes.forEach((node, i) => {
       const pulse = 1 + Math.sin(t * 2.2 + pulseOffsets[i]) * 0.12;
-      node.scale.setScalar(hoveredNode === node ? 1.5 : pulse);
-      node.material.emissiveIntensity = hoveredNode === node ? 0.95 : 0.35;
+      const selected = activeRegion ? node.userData.region === activeRegion : true;
+      const isHovered = hoveredNode === node;
+      node.scale.setScalar(isHovered ? 1.55 : pulse * (selected ? 1 : 0.72));
+      node.material.emissiveIntensity = isHovered ? 0.95 : selected ? 0.45 : 0.18;
+      node.material.opacity = selected ? 1 : 0.55;
+      node.material.transparent = true;
+    });
+
+    heatmapMeshes.forEach((heat) => {
+      const selected = activeRegion ? heat.region === activeRegion : true;
+      const pulse = 0.84 + Math.sin(t * 2.6 + heat.offset) * 0.26;
+      const scale = 1 + pulse * heat.intensity * 0.34;
+
+      heat.ring.scale.set(scale, scale, 1);
+      heat.core.scale.set(0.95 + pulse * 0.22, 0.95 + pulse * 0.22, 1);
+      heat.ring.material.opacity = selected ? 0.38 : 0.11;
+      heat.core.material.opacity = selected ? 0.62 : 0.22;
     });
 
     camera.position.z += (targetCameraZ - camera.position.z) * 0.09;
