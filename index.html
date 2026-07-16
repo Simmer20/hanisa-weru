@@ -13,7 +13,20 @@
   <!-- Site stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="is-loading">
+
+<div id="page-loader" class="page-loader" aria-live="polite" aria-label="Loading site">
+  <div class="page-loader-inner">
+    <p class="loader-kicker">LynchPin Advisory</p>
+    <h2 class="loader-title">Building your experience</h2>
+    <div class="loader-progress" role="presentation">
+      <span class="loader-progress-fill" id="loader-progress-fill"></span>
+    </div>
+    <p class="loader-percent" id="loader-percent">0%</p>
+  </div>
+</div>
+
+<div id="site-shell">
 
 <!-- HEADER -->
 <header>
@@ -23,7 +36,12 @@
       <span class="logo-subtitle">LynchPin Advisory</span>
     </div>
     <div class="nav-right">
-      <ul class="nav-links">
+      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" title="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">Why Hanisa</a></li>
         <li><a href="#gallery">In Action</a></li>
         <li><a href="#engagements">Work With Me</a></li>
@@ -539,6 +557,8 @@
     </div>
   </div>
 </footer>
+
+</div>
 
 <!-- Three.js + GSAP/ScrollTrigger (CDN) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
