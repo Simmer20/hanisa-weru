@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The LynchPin | Building Africa's Convergence Economy</title>
+  <meta name="description" content="The LynchPin facilitates impactful collaborations and drives business growth through tailored strategic advisory, connecting global expertise with African opportunities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-top">
+          <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo">
+          <div class="logo-text">
+            <span class="logo-name">LYNCHPIN</span>
+            <span class="logo-sub">ADVISORY</span>
+          </div>
+        </div>
+        <span class="logo-tagline">WE CONNECT THE DOTS</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Case Studies</a>
+        <a href="about.html#team">Our Team</a>
+        <a href="index.html#contact" class="nav-cta">Ready to Scale?</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="hero">
+    <div id="heroThreeCanvas" class="hero-three-canvas" aria-hidden="true"></div>
+    <div class="hero-three-overlay" aria-hidden="true"></div>
+    <div class="hero-content hero-content--single">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Strategic Advisory for Africa's Growth</p>
+        <h1 class="hero-title">
+          Building Africa's<br />
+          <span class="gold-text">Convergence</span> Economy
+        </h1>
+        <p class="hero-desc">
+         LynchPin	is	the	boutique	advisory	firm	for	global	companies	navigating	Africa's	convergence	
+          economy	â where	fintech	meets	clean	energy	meets	infrastructure.	We	turn	market	complexity	
+          into	commercial	clarity:	from	strategy	to	partnerships	to	execution
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary">Get Started</a>
+          <a href="services.html" class="btn btn-outline">Our Services</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">18+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">30+</span>
+            <span class="stat-label">Markets Reached</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Clients Worked With</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== GLOBAL REACH MAP SECTION ========== -->
+  <section class="section map-section dark-section" id="global-reach">
+    <div class="container">
+      <div class="section-header light">
+        <p class="section-eyebrow">Our Global Reach</p>
+        <h2 class="section-title">A Network Spanning <span class="gold-text">Three Continents</span></h2>
+        <p class="section-subtitle">From Nairobi to New York, Dubai to Madrid â the LynchPin connects capital, expertise, and opportunity across the world's most dynamic markets.</p>
+      </div>
+
+      <div class="map-wrapper">
+        <div id="worldMap" class="world-map"></div>
+        <button type="button" class="map-reset-btn" id="mapResetBtn" aria-label="Reset map view">Reset View</button>
+        <div class="map-tooltip-note"><i class="fas fa-info-circle"></i> Hover over highlighted markers to explore our active regions</div>
+      </div>
+
+      <div class="region-grid">
+        <div class="region-card" data-region="Africa" role="button" tabindex="0" aria-label="Highlight Africa on map">
+          <div class="region-icon"><i class="fas fa-globe-africa"></i></div>
+          <h3>Africa</h3>
+          <p class="region-count">22 Countries</p>
+          <p class="region-desc">Our home continent and core focus â from East to West, Southern to North Africa.</p>
+        </div>
+        <div class="region-card" data-region="Middle East" role="button" tabindex="0" aria-label="Highlight Middle East on map">
+          <div class="region-icon"><i class="fas fa-mosque"></i></div>
+          <h3>Middle East</h3>
+          <p class="region-count">Dubai Â· Kuwait Â· Qatar</p>
+          <p class="region-desc">Gateway partnerships connecting Gulf capital and enterprise with African markets.</p>
+        </div>
+        <div class="region-card" data-region="Europe" role="button" tabindex="0" aria-label="Highlight Europe on map">
+          <div class="region-icon"><i class="fas fa-landmark"></i></div>
+          <h3>Europe</h3>
+          <p class="region-count">Spain Â· London Â· Denmark</p>
+          <p class="region-desc">Strategic bridges to European development finance, ESG capital, and institutions.</p>
+        </div>
+        <div class="region-card" data-region="United States" role="button" tabindex="0" aria-label="Highlight United States on map">
+          <div class="region-icon"><i class="fas fa-flag-usa"></i></div>
+          <h3>United States</h3>
+          <p class="region-count">NY Â· Washington DC Â· Baltimore Â· Delaware</p>
+          <p class="region-desc">Direct consultancy engagements with US-based companies on growth strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OVERVIEW: TWO PATHWAYS ========== -->
+  <section class="section pathways-section" id="pathways">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">How We Work With You</p>
+        <h2 class="section-title">Ways to <span class="gold-text">Partner With Us</span></h2>
+        <p class="section-subtitle">Pick the partnership lane that fits your ambition, then let us help you move from big vision to measurable results.</p>
+      </div>
+      <div class="pathways-grid">
+        <article class="pathway-card">
+          <div class="pathway-icon"><i class="fas fa-briefcase"></i></div>
+          <h3>Ready to Scale? <span class="gold-text">Let's Build the RoadMap</span></h3>
+          <p>Choose from Foundation, Growth, and Enterprise support to sharpen your strategy, open the right doors, and accelerate market entry with confidence.</p>
+          <a href="services.html#consulting-plans" class="pathway-link">Find Your Growth Plan <i class="fas fa-arrow-right"></i></a>
+        </article>
+        <article class="pathway-card">
+          <div class="pathway-icon"><i class="fas fa-chart-line"></i></div>
+          <h3><span class="gold-text">Financing Impact? </span>We Speak Carbon and Capital</h3>
+          <p>Three tailored Advisory plans to help you scale clean energy, clean water and carbon market initiatives with fundable, execution ready strategy</p>
+          <a href="services.html#us-consultancy" class="pathway-link">Explore Sustainability Plans <i class="fas fa-arrow-right"></i></a>
+        </article>
+        <article class="pathway-card">
+          <div class="pathway-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Pipelines Running Dry?</h3>
+          <p>Build a stronger pipeline with hands-on support in lead generation, funnel design, and go-to-market execution for scalable US growth.</p>
+          <a href="services.html#us-consultancy" class="pathway-link">Launch Growth Support <i class="fas fa-arrow-right"></i></a>
+        </article>
+        <article class="pathway-card">
+          <div class="pathway-icon"><i class="fas fa-microphone-alt"></i></div>
+          <h3>Need a Speaker Who Actually Delivers?</h3>
+          <p>Bring in Hanisa Weru to energize your audience with practical insight on AI, sustainability, climate finance, and inclusive innovation.</p>
+          <a href="services.html#speaking" class="pathway-link">Book a Speaker Conversation <i class="fas fa-arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROOF OF WORK PREVIEW ========== -->
+ <section class="trusted-section">
+    <div class="container">
+        <div class="trusted-header">
+            <span class="section-eyebrow">
+                Trusted Across Industries
+            </span>
+            <h2>
+                Organizations We've Worked With
+            </h2>
+            <p>
+                From multinational corporations and development partners to
+                financial institutions and fast-growing technology companies,
+                LynchPin has partnered with organizations driving growth and
+                transformation across Africa.
+            </p>
+        </div>
+        <div class="logo-grid">
+            <div class="partner-card">
+                <img src="images/logo-equity.png" alt="Equity Bank">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-kcb.png" alt="KCB">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-airtel.jpg" alt="Airtel">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-inclusivity.jpg" alt="Inclusivity">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-bboxx.png" alt="BBOXX">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-SAWA.jpg" alt="SAWA">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-verst.png" alt="Verst Carbon">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-signvrse.png" alt="Signvrse">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-startimes.png" alt="StarTimes">
+            </div>
+            <div class="partner-card">
+                <img src="images/logo-itm.jpg" alt="ITM Africa">
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Get In Touch</p>
+        <h2 class="section-title">Start a <span class="gold-text">Conversation</span></h2>
+        <p class="section-subtitle">Ready to explore how the LynchPin can help you unlock opportunities across Africa and beyond? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-globe-africa"></i></div>
+            <div>
+              <h4>Global Operations</h4>
+              <p>Serving clients across Africa, the Middle East, Europe, and the United States</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+            <div>
+              <h4>Connect on LinkedIn</h4>
+              <a href="https://www.linkedin.com/in/hanisa-w-w-73470424/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3ByIgbe5cSR9e4%2F7eUIF1fig%3D%3D" target="_blank" rel="noopener">Hanisa Weru â the LynchPin</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4>Let's Talk Strategy</h4>
+              <a href="tel:+254782522938">+254 782 522 938</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email Us</h4>
+              <a href="mailto:thelynchpinconsultants@gmail.com">thelynchpinconsultants@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-tagline">
+            <blockquote>
+              Iâve built go-to-market and partnership wins across fintech, PAYGO solar, clean water, and telecom â with direct clients, businesses, governments, and development partners alike. Thatâs what The LynchPin Advisory brings to the table.</blockquote>
+            <cite>â Hanisa Weru, Founder</cite>
+          </div>
+        </div>
+        <div class="contact-booking-card">
+      <div id="ctaThreeFx" class="cta-three-fx" aria-hidden="true"></div>
+
+    <h2>Turn Momentum Into Market Moves</h2>
+    <p>
+      From market entry to strategic partnerships,
+      we help you prioritize the right opportunities
+      and execute with speed.
+    </p>
+    <a href="https://calendly.com/thelynchpinconsultants"
+       target="_blank"
+       rel="noopener"
+       class="btn btn-gold">
+       Book Your 30-Minute Strategy Call
+    </a>
+    <p>Bring your goals. We will map the clearest path to growth across Africa and beyond.</p>
+
+</div>
+        <!-- <form class="contact-form" id="contactForm" action="api/contact.php" method="POST">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="form-honeypot" aria-hidden="true" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required placeholder="Your first name" />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required placeholder="Your last name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="organization">Organization</label>
+            <input type="text" id="organization" name="organization" placeholder="Your company or organization" />
+          </div>
+          <div class="form-group">
+            <label for="interest">Area of Interest</label>
+            <select id="interest" name="interest">
+              <option value="">Select a service area...</option>
+              <option value="consulting">Business Strategy & Consulting Plans</option>
+              <option value="speaking">Speaking & Event Hosting</option>
+              <option value="us-consultancy">US Lead Generation & Sales Funnels</option>
+              <option value="partnerships">Strategic Partnerships</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required rows="5" placeholder="Tell us about your needs and how we can help..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold btn-full">
+            <span>Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+          <div id="formSuccess" class="form-success" style="display:none;">
+            <i class="fas fa-check-circle"></i> Thank you! We'll be in touch shortly.
+          </div>
+          <div id="formError" class="form-error" style="display:none;">
+            <i class="fas fa-exclamation-circle"></i> Message could not be sent. Please email us directly.
+          </div>
+        </form> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo footer-logo">
+            <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo">
+        <div class="logo-text">
+          <span class="logo-name">LYNCHPIN</span>
+          <span class="logo-sub">ADVISORY</span>
+        </div>
+           <!-- <span class="logo-tagline">we connect the dots</span>-->
+          </a>
+          <p class="footer-desc">Connecting Strategic Partnerships Across Africa and beyond. Your trusted partner for sustainable growth, green energy, and transformative business advisory.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/in/hanisa-w-w-73470424/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3ByIgbe5cSR9e4%2F7eUIF1fig%3D%3D" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="about.html#team">Our Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#consulting-plans">Consulting Plans</a></li>
+            <li><a href="services.html#speaking">Speaking & Events</a></li>
+            <li><a href="services.html#us-consultancy">US Consultancy</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Global Reach</h4>
+          <ul>
+            <li><a href="index.html#global-reach">Africa (22 Countries)</a></li>
+            <li><a href="index.html#global-reach">Middle East</a></li>
+            <li><a href="index.html#global-reach">Europe</a></li>
+            <li><a href="index.html#global-reach">United States</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 the LynchPin. All rights reserved.</p>
+        <p>Designed for impact. Built for Africa and beyond.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.min.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/main.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1c748a82e3db169',t:'MTc4NDI3MDcyNg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"20b35fa4a85a4015b48cfb081505ee20","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+

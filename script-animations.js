@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.utils.toArray('#hero-3d, #network-3d-container, #cta-3d-container').forEach((el) => {
+gsap.utils.toArray('#worldMap, #network-3d-container, #cta-3d-container').forEach((el) => {
   gsap.from(el, {
     scrollTrigger: {
       trigger: el,

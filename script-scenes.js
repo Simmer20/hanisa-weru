@@ -442,58 +442,343 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
   if (!container) return;
   const width = container.clientWidth;
   const height = container.clientHeight;
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x1A3348);
+  scene.background = new THREE.Color(0x0E2A47); // Your navy blue
 
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-  camera.position.set(0, 0, 12);
+  camera.position.set(0, 0, isMobile ? 14 : 11);
+  const minZoomZ = isMobile ? 8.5 : 6.8;
+  const maxZoomZ = isMobile ? 20 : 15;
+  let targetCameraZ = camera.position.z;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.domElement.style.touchAction = 'none';
+  renderer.domElement.style.cursor = 'grab';
   container.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const dl = new THREE.DirectionalLight(0xffffff, 0.9);
-  dl.position.set(2, 3, 5);
-  scene.add(dl);
+  // Premium lighting
+  const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+  scene.add(ambient);
+  const main = new THREE.DirectionalLight(0xffffff, 1.2);
+  main.position.set(2, 3, 5);
+  scene.add(main);
+  const fill = new THREE.DirectionalLight(0x4EA8FF, 0.6);
+  fill.position.set(-3, -1, 4);
+  scene.add(fill);
 
+  // Your 7 pillars
   const sectors = [
-    { label: 'Banking', color: 0xB68D40, pos: [-2.5, 1.8, 0] },
-    { label: 'Fintech', color: 0xEFEAE3, pos: [2.2, 1.6, 0] },
-    { label: 'Clean Energy', color: 0x7DAF6A, pos: [-1.2, -2.0, 1.5] },
-    { label: 'Infrastructure', color: 0x6A9BBF, pos: [1.8, -1.8, -1.2] },
-    { label: 'Carbon Markets', color: 0xD4B06A, pos: [0.0, 0.0, -2.8] },
+    { label: 'Fintech', color: 0x6D8BFF, pos: [-2.8, 1.6, 0] },
+    { label: 'Clean Energy', color: 0x38BDF8, pos: [2.8, 1.6, 0] },
+    { label: 'Infrastructure', color: 0x22D3EE, pos: [-2.2, -1.8, 0.8] },
+    { label: 'InsureTech', color: 0x60A5FA, pos: [2.2, -1.8, 0.8] },
+    { label: 'Water & Sanitation', color: 0x7DD3FC, pos: [0.0, 2.8, -0.8] },
+    { label: 'Banking', color: 0x4EA8FF, pos: [0.0, -2.8, -0.8] },
+    { label: 'B2B Frameworks', color: 0x93C5FD, pos: [0.0, 0.0, -3.0] },
   ];
 
   const group = new THREE.Group();
   scene.add(group);
+  let dragActive = false;
+  let dragPointerId = null;
+  let lastDragX = 0;
+  let lastDragY = 0;
+  let touchRotateActive = false;
+  let rotateVelocityY = 0;
+  let userTiltX = 0;
 
-  sectors.forEach((s) => {
-    const sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(0.55, 16, 16),
-      new THREE.MeshStandardMaterial({ color: s.color, emissive: s.color, emissiveIntensity: 0.2 })
+  function drawRoundedRect(ctx, x, y, w, h, r) {
+    const radius = Math.min(r, w * 0.5, h * 0.5);
+    if (typeof ctx.roundRect === 'function') {
+      ctx.beginPath();
+      ctx.roundRect(x, y, w, h, radius);
+      return;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + w - radius, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+    ctx.lineTo(x + w, y + h - radius);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    ctx.lineTo(x + radius, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+  }
+
+  // Premium center node
+  const core = new THREE.Mesh(
+    new THREE.SphereGeometry(0.8, 32, 32),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xB68D40,
+      emissive: 0xB68D40,
+      emissiveIntensity: 0.3,
+      metalness: 0.3,
+      roughness: 0.2,
+    })
+  );
+  group.add(core);
+
+  // Subtle glow ring
+  const glowRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1.2, 0.03, 16, 60),
+    new THREE.MeshBasicMaterial({
+      color: 0xB68D40,
+      transparent: true,
+      opacity: 0.3,
+    })
+  );
+  glowRing.rotation.x = Math.PI * 0.5;
+  group.add(glowRing);
+
+  // Create pillars and connections
+  const pillarGroup = new THREE.Group();
+  group.add(pillarGroup);
+
+  sectors.forEach((s, i) => {
+    // Pillar base
+    const base = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.5, 0.55, 0.15, 16),
+      new THREE.MeshPhysicalMaterial({
+        color: s.color,
+        emissive: s.color,
+        emissiveIntensity: 0.2,
+        metalness: 0.2,
+        roughness: 0.3,
+      })
     );
-    sphere.position.set(s.pos[0], s.pos[1], s.pos[2]);
-    group.add(sphere);
+    base.position.set(s.pos[0], s.pos[1] - 0.4, s.pos[2]);
+    pillarGroup.add(base);
+
+    // Pillar top
+    const top = new THREE.Mesh(
+      new THREE.SphereGeometry(0.35, 16, 16),
+      new THREE.MeshPhysicalMaterial({
+        color: s.color,
+        emissive: s.color,
+        emissiveIntensity: 0.4,
+        metalness: 0.1,
+        roughness: 0.2,
+      })
+    );
+    top.position.set(s.pos[0], s.pos[1] + 0.4, s.pos[2]);
+    pillarGroup.add(top);
+
+    // Connecting rod (center to pillar)
+    const from = new THREE.Vector3(0, 0, 0);
+    const to = new THREE.Vector3(s.pos[0], s.pos[1], s.pos[2]);
+    const dir = new THREE.Vector3().subVectors(to, from);
+    const len = dir.length();
+    const rod = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.04, 0.04, len, 8),
+      new THREE.MeshPhysicalMaterial({
+        color: s.color,
+        emissive: s.color,
+        emissiveIntensity: 0.1,
+        transparent: true,
+        opacity: 0.6,
+      })
+    );
+    rod.position.copy(from).add(to).multiplyScalar(0.5);
+    rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+    pillarGroup.add(rod);
+
+    // Label - high contrast and crisp text for readability
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const fontSize = isMobile ? 34 : 30;
+    const lineHeight = Math.round(fontSize * 1.25);
+    const paddingX = 22;
+    const paddingY = 14;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const words = s.label.split(' ');
+    const lines = [];
+    let currentLine = '';
+
+    ctx.font = `700 ${fontSize}px "Plus Jakarta Sans", "Segoe UI", sans-serif`;
+    words.forEach((word) => {
+      const candidate = currentLine ? `${currentLine} ${word}` : word;
+      if (ctx.measureText(candidate).width > 280 && currentLine) {
+        lines.push(currentLine);
+        currentLine = word;
+      } else {
+        currentLine = candidate;
+      }
+    });
+    if (currentLine) lines.push(currentLine);
+
+    const textWidth = lines.reduce((max, line) => Math.max(max, ctx.measureText(line).width), 0);
+    const boxWidth = Math.ceil(textWidth + paddingX * 2);
+    const boxHeight = Math.ceil(lines.length * lineHeight + paddingY * 2);
+
+    canvas.width = Math.max(1, Math.ceil(boxWidth * dpr));
+    canvas.height = Math.max(1, Math.ceil(boxHeight * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, boxWidth, boxHeight);
+    ctx.font = `700 ${fontSize}px "Plus Jakarta Sans", "Segoe UI", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const gradient = ctx.createLinearGradient(0, 0, boxWidth, boxHeight);
+    gradient.addColorStop(0, 'rgba(7, 25, 45, 0.94)');
+    gradient.addColorStop(1, 'rgba(10, 35, 61, 0.92)');
+    ctx.fillStyle = gradient;
+    ctx.strokeStyle = 'rgba(182, 141, 64, 0.85)';
+    ctx.lineWidth = 1.5;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+    ctx.shadowBlur = 12;
+    drawRoundedRect(ctx, 1, 1, boxWidth - 2, boxHeight - 2, 10);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.stroke();
+
+    ctx.fillStyle = '#F9FCFF';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
+    ctx.shadowBlur = 5;
+    const startY = boxHeight / 2 - ((lines.length - 1) * lineHeight) / 2;
+    lines.forEach((line, lineIndex) => {
+      ctx.fillText(line, boxWidth / 2, startY + lineIndex * lineHeight);
+    });
+    ctx.shadowBlur = 0;
+
+    const texture = new THREE.CanvasTexture(canvas);
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false })
+    );
+    texture.needsUpdate = true;
+    const labelScale = isMobile ? 1.35 : 1.5;
+    sprite.scale.set((boxWidth / 300) * labelScale, (boxHeight / 300) * labelScale, 1);
+    sprite.position.set(s.pos[0], s.pos[1] + 1.0, s.pos[2]);
+    pillarGroup.add(sprite);
   });
 
-  for (let i = 0; i < sectors.length; i++) {
-    for (let j = i + 1; j < sectors.length; j++) {
-      const p1 = new THREE.Vector3(sectors[i].pos[0], sectors[i].pos[1], sectors[i].pos[2]);
-      const p2 = new THREE.Vector3(sectors[j].pos[0], sectors[j].pos[1], sectors[j].pos[2]);
-      const geo = new THREE.BufferGeometry().setFromPoints([p1, p2]);
-      const mat = new THREE.LineBasicMaterial({ color: 0xB68D40, transparent: true, opacity: 0.25 });
-      const line = new THREE.Line(geo, mat);
-      group.add(line);
+  function applyZoom(delta) {
+    targetCameraZ = THREE.MathUtils.clamp(targetCameraZ + delta, minZoomZ, maxZoomZ);
+  }
+
+  function onWheel(event) {
+    event.preventDefault();
+    applyZoom(event.deltaY * 0.012);
+  }
+
+  function onPointerDown(event) {
+    if (event.pointerType === 'touch') return;
+    dragActive = true;
+    dragPointerId = event.pointerId;
+    lastDragX = event.clientX;
+    lastDragY = event.clientY;
+    renderer.domElement.style.cursor = 'grabbing';
+  }
+
+  function onPointerMove(event) {
+    if (!dragActive || dragPointerId !== event.pointerId) return;
+    const dx = event.clientX - lastDragX;
+    const dy = event.clientY - lastDragY;
+    lastDragX = event.clientX;
+    lastDragY = event.clientY;
+
+    rotateVelocityY += dx * 0.00026;
+    userTiltX = THREE.MathUtils.clamp(userTiltX - dy * 0.0018, -0.42, 0.42);
+  }
+
+  function onPointerUp(event) {
+    if (dragPointerId !== event.pointerId) return;
+    dragActive = false;
+    dragPointerId = null;
+    renderer.domElement.style.cursor = 'grab';
+  }
+
+  let pinchDistance = null;
+  let lastTouchX = 0;
+  let lastTouchY = 0;
+  function getTouchDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  }
+
+  function onTouchStart(event) {
+    if (event.touches.length === 2) {
+      touchRotateActive = false;
+      pinchDistance = getTouchDistance(event.touches);
+      return;
+    }
+
+    if (event.touches.length === 1) {
+      pinchDistance = null;
+      touchRotateActive = true;
+      lastTouchX = event.touches[0].clientX;
+      lastTouchY = event.touches[0].clientY;
     }
   }
 
+  function onTouchMove(event) {
+    if (event.touches.length === 2 && pinchDistance !== null) {
+      event.preventDefault();
+      const currentDistance = getTouchDistance(event.touches);
+      const delta = (pinchDistance - currentDistance) * 0.02;
+      applyZoom(delta);
+      pinchDistance = currentDistance;
+      return;
+    }
+
+    if (event.touches.length === 1 && touchRotateActive) {
+      event.preventDefault();
+      const touch = event.touches[0];
+      const dx = touch.clientX - lastTouchX;
+      const dy = touch.clientY - lastTouchY;
+      lastTouchX = touch.clientX;
+      lastTouchY = touch.clientY;
+
+      rotateVelocityY += dx * 0.00026;
+      userTiltX = THREE.MathUtils.clamp(userTiltX - dy * 0.0018, -0.42, 0.42);
+    }
+  }
+
+  function onTouchEnd(event) {
+    if (event.touches.length < 2) pinchDistance = null;
+    if (event.touches.length === 1) {
+      touchRotateActive = true;
+      lastTouchX = event.touches[0].clientX;
+      lastTouchY = event.touches[0].clientY;
+      return;
+    }
+    touchRotateActive = false;
+  }
+
+  renderer.domElement.addEventListener('pointerdown', onPointerDown);
+  renderer.domElement.addEventListener('pointermove', onPointerMove);
+  renderer.domElement.addEventListener('pointerup', onPointerUp);
+  renderer.domElement.addEventListener('pointerleave', onPointerUp);
+  renderer.domElement.addEventListener('pointercancel', onPointerUp);
+  renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
+  renderer.domElement.addEventListener('touchstart', onTouchStart, { passive: false });
+  renderer.domElement.addEventListener('touchmove', onTouchMove, { passive: false });
+  renderer.domElement.addEventListener('touchend', onTouchEnd);
+  renderer.domElement.addEventListener('touchcancel', onTouchEnd);
+
+  // Animation
   function animate() {
     requestAnimationFrame(animate);
-    group.rotation.y += 0.002;
-    group.rotation.x = Math.sin(Date.now() * 0.0002) * 0.05;
+    const t = performance.now() * 0.001;
+    const autoSpin = 0.0012;
+    const ambientTilt = Math.sin(t * 0.1) * 0.05;
+
+    group.rotation.y += autoSpin + rotateVelocityY;
+    group.rotation.x += (ambientTilt + userTiltX - group.rotation.x) * 0.14;
+    rotateVelocityY *= 0.92;
+    userTiltX *= 0.985;
+
+    core.rotation.y += 0.01;
+    glowRing.rotation.z += 0.005;
+    glowRing.material.opacity = 0.25 + Math.sin(t * 0.8) * 0.1;
+
+    camera.position.z += (targetCameraZ - camera.position.z) * 0.12;
+
     renderer.render(scene, camera);
   }
   animate();

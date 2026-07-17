@@ -3,6 +3,8 @@ function initWorldGlobe() {
   if (!mapEl || typeof Globe === 'undefined' || mapEl.dataset.globeReady === '1') return false;
   mapEl.dataset.globeReady = '1';
 
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
+
   const hubs = [
     { name: 'Nairobi, Kenya', region: 'Africa', lat: -1.2921, lng: 36.8219, color: '#C8A46A' },
     { name: 'Dubai, UAE', region: 'Middle East', lat: 25.2048, lng: 55.2708, color: '#E5C97C' },
@@ -28,7 +30,7 @@ function initWorldGlobe() {
     .pointLng('lng')
     .pointColor('color')
     .pointAltitude(0.013)
-    .pointRadius(0.22)
+    .pointRadius(isMobile ? 0.28 : 0.22)
     .pointLabel(d => '<b>' + d.name + '</b><br/>' + d.region + ' Hub')
     .arcsData(routes)
     .arcStartLat('startLat')
@@ -36,9 +38,9 @@ function initWorldGlobe() {
     .arcEndLat('endLat')
     .arcEndLng('endLng')
     .arcColor('color')
-    .arcDashLength(0.45)
-    .arcDashGap(0.35)
-    .arcDashAnimateTime(2400)
+    .arcDashLength(isMobile ? 0.38 : 0.45)
+    .arcDashGap(isMobile ? 0.28 : 0.35)
+    .arcDashAnimateTime(isMobile ? 2800 : 2400)
     .atmosphereColor('#9CC7EE')
     .atmosphereAltitude(0.22)
     .showAtmosphere(true);
@@ -53,12 +55,14 @@ function initWorldGlobe() {
 
   globe.width(mapEl.clientWidth);
   globe.height(mapEl.clientHeight);
-  globe.pointOfView({ lat: 9, lng: 16, altitude: 2.15 });
+  globe.pointOfView({ lat: 9, lng: 16, altitude: isMobile ? 2.35 : 2.15 });
 
   const controls = globe.controls();
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.45;
+  controls.autoRotateSpeed = isMobile ? 0.32 : 0.45;
   controls.enablePan = false;
+  controls.minDistance = isMobile ? 175 : 145;
+  controls.maxDistance = isMobile ? 420 : 360;
 
   window.addEventListener('resize', () => {
     globe.width(mapEl.clientWidth);
