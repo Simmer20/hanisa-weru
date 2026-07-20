@@ -12,6 +12,25 @@
     });
   }
 
+  async function loadScriptWithFallback(sources) {
+    let lastError = null;
+
+    for (const src of sources) {
+      try {
+        await loadScript(src);
+        return true;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    if (lastError) {
+      console.warn(lastError);
+    }
+
+    return false;
+  }
+
   async function init() {
     try {
       const hasInlineContent = shell
@@ -22,14 +41,41 @@
         throw new Error('No inlined site shell content found in index.html.');
       }
 
-      await loadScript('https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.min.js');
-      await loadScript('https://cdn.jsdelivr.net/npm/globe.gl@2.32.0/dist/globe.gl.min.js');
-      await loadScript('js/map.js');
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js');
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js');
-      await loadScript('script-scenes.js');
       await loadScript('script-interactions.js');
-      await loadScript('script-animations.js');
+
+      const threeLoaded = await loadScriptWithFallback([
+        'js/vendor/three-152.min.js',
+        'js/vendor/three.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+      ]);
+
+      const globeLoaded = await loadScriptWithFallback([
+        'js/vendor/globe.gl.min.js',
+        'https://unpkg.com/globe.gl@2.32.0/dist/globe.gl.min.js',
+        'https://cdn.jsdelivr.net/npm/globe.gl@2.32.0/dist/globe.gl.min.js',
+      ]);
+
+      if (threeLoaded && globeLoaded) {
+        await loadScript('js/map.js');
+        await loadScript('script-scenes.js');
+      }
+
+      const gsapLoaded = await loadScriptWithFallback([
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+      ]);
+
+      const scrollTriggerLoaded = gsapLoaded
+        ? await loadScriptWithFallback([
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',
+            'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+          ])
+        : false;
+
+      if (gsapLoaded && scrollTriggerLoaded) {
+        await loadScript('script-animations.js');
+      }
     } catch (error) {
       console.error(error);
       if (shell) {
