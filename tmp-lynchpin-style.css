@@ -1,5 +1,5 @@
-﻿/* ============================================================
-   LYNCHPIN ADVISORY â Main Stylesheet
+/* ============================================================
+   THE LYNCHPIN AUTHORITY �?? Main Stylesheet
    Brand Colors: Navy #17263A | Gold #C8A46A | Cream #F5EDD8
    ============================================================ */
 
@@ -960,7 +960,7 @@ h1,h2,h3,h4,h5 {
 }
 
 .service-list li::before {
-  content: 'â';
+  content: '�??';
   position: absolute;
   left: 0;
   color: var(--gold);
@@ -1938,7 +1938,7 @@ h1,h2,h3,h4,h5 {
 .nav-links a.active::after { transform: scaleX(1); }
 
 /* ============================================================
-   HERO â SINGLE COLUMN VARIANT (no side visual)
+   HERO �?? SINGLE COLUMN VARIANT (no side visual)
    ============================================================ */
 .hero-content--single {
   display: flex;
@@ -2823,7 +2823,7 @@ h1,h2,h3,h4,h5 {
 }
 
 /* ============================================================
-   ABOUT PAGE â OVERVIEW & FOUNDER
+   ABOUT PAGE �?? OVERVIEW & FOUNDER
    ============================================================ */
 .about-overview-section { background: var(--cream-light); }
 
@@ -3174,7 +3174,7 @@ h1,h2,h3,h4,h5 {
 .team-note i { color: var(--gold-dark); margin-right: 6px; }
 
 /* ============================================================
-   RESPONSIVE â NEW SECTIONS
+   RESPONSIVE �?? NEW SECTIONS
    ============================================================ */
 @media (max-width: 1024px) {
   .region-grid { grid-template-columns: 1fr 1fr; }
@@ -3455,7 +3455,7 @@ h1,h2,h3,h4,h5 {
       border-bottom: none;
     }
     .case-detail-content ul li::before {
-      content: "â";
+      content: "�??";
       position: absolute;
       left: 0;
       color: #d4af37;
@@ -3794,7 +3794,7 @@ h1,h2,h3,h4,h5 {
 }
 
 .case-expand ul li::before {
-  content: "â¹";
+  content: "�?�";
   position: absolute;
   left: 0;
   color: #d4af37;
