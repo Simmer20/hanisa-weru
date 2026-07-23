@@ -737,9 +737,27 @@ section {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr;
+  gap: 24px;
   align-items: start;
+}
+
+.about-lead h2 {
+  margin-bottom: 0.9rem;
+}
+
+.about-bridge {
+  margin: 0 0 1.35rem;
+  max-width: none;
+  color: var(--heading);
+  font-weight: 500;
+  font-size: 1.03rem;
+  line-height: 1.76;
+  padding: 0.95rem 1.05rem;
+  border-left: 4px solid var(--gold);
+  background: linear-gradient(95deg, color-mix(in srgb, var(--light-beige) 82%, var(--warm-white)), color-mix(in srgb, var(--bg) 72%, var(--warm-white)));
+  border-radius: 0 12px 12px 0;
+  box-shadow: 0 6px 16px var(--card-shadow);
 }
 
 .about-story-intro {
@@ -899,6 +917,170 @@ section {
   color: var(--slate);
   font-size: 0.95rem;
   line-height: 1.75;
+}
+
+.why-panel {
+  position: relative;
+  background: linear-gradient(140deg, var(--warm-white), color-mix(in srgb, var(--light-beige) 62%, var(--warm-white)));
+  border: 1px solid color-mix(in srgb, var(--gold) 36%, var(--border-subtle));
+  border-radius: 24px;
+  padding: 1.4rem;
+  box-shadow: 0 12px 30px var(--card-shadow);
+}
+
+.purpose-header {
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow {
+  margin: 0;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--slate);
+}
+
+.purpose-title {
+  margin-top: 0.45rem;
+  font-size: clamp(1.45rem, 1.2rem + 1vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.gold-text {
+  color: var(--gold);
+}
+
+.purpose-intro {
+  padding: 1rem 1.05rem;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--gold-light) 35%, var(--border-subtle));
+  background: linear-gradient(150deg, var(--bg), var(--light-beige));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.purpose-intro:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--gold) 48%, var(--border-subtle));
+  box-shadow: 0 10px 20px var(--card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.purpose-intro:hover .purpose-quote {
+  transform: translateX(2px);
+}
+
+.purpose-intro p {
+  margin: 0;
+  color: var(--slate);
+  font-size: 0.96rem;
+  line-height: 1.72;
+}
+
+.purpose-intro p + p {
+  margin-top: 0.72rem;
+}
+
+.purpose-quote {
+  margin-top: 0.9rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.22rem;
+  color: var(--exec-blue);
+  border-left: 3px solid var(--gold-light);
+  padding-left: 0.8rem;
+  transition: transform 0.28s ease;
+}
+
+.purpose-stack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 0.95rem;
+}
+
+.purpose-card {
+  background: linear-gradient(155deg, var(--warm-white), color-mix(in srgb, var(--light-beige) 40%, var(--warm-white)));
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, var(--border-subtle));
+  border-radius: 16px;
+  padding: 1rem 1.05rem;
+  box-shadow: 0 8px 18px var(--card-shadow);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+}
+
+.purpose-card:nth-child(2) {
+  background: linear-gradient(155deg, color-mix(in srgb, var(--bg) 65%, white), var(--warm-white));
+}
+
+.purpose-card:nth-child(1):hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--exec-blue) 36%, var(--gold-light));
+  box-shadow: 0 14px 24px var(--card-shadow-hover);
+}
+
+.purpose-card:nth-child(2):hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: color-mix(in srgb, var(--gold) 58%, var(--border-subtle));
+  background: linear-gradient(155deg, color-mix(in srgb, var(--warm-white) 70%, white), color-mix(in srgb, var(--light-beige) 45%, var(--warm-white)));
+  box-shadow: 0 16px 26px var(--card-shadow-hover);
+}
+
+.purpose-card h4,
+.purpose-linchpin h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.purpose-card p,
+.purpose-linchpin p {
+  margin: 0;
+  color: var(--slate);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.purpose-card p + p,
+.purpose-linchpin p + p {
+  margin-top: 0.7rem;
+}
+
+.purpose-signature {
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.purpose-linchpin {
+  margin-top: 0.95rem;
+  background: linear-gradient(130deg, color-mix(in srgb, var(--gold-light) 22%, var(--warm-white)), var(--light-beige));
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--gold) 42%, var(--border-subtle));
+  padding: 1rem 1.05rem;
+  box-shadow: 0 10px 22px var(--card-shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.purpose-linchpin:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--gold) 66%, var(--border-subtle));
+  box-shadow: 0 16px 28px var(--card-shadow-hover);
+}
+
+.purpose-linchpin h4,
+.purpose-linchpin p {
+  color: var(--heading);
+}
+
+.purpose-linchpin h4 {
+  color: var(--gold);
+}
+
+.purpose-definition {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--exec-blue) 72%, var(--heading));
+  border-left: 3px solid color-mix(in srgb, var(--gold) 70%, var(--gold-light));
+  padding-left: 0.72rem;
+  margin-bottom: 0.72rem;
 }
 
 /* ---------- ENGAGEMENT CARDS ---------- */
@@ -1892,6 +2074,25 @@ footer {
   .engagement-grid { grid-template-columns: 1fr; }
   .timeline-shell {
     padding: 1rem 0.8rem;
+  }
+  .why-panel {
+    padding: 1rem 0.8rem;
+    border-radius: 18px;
+  }
+  .purpose-title {
+    font-size: 1.44rem;
+  }
+  .purpose-intro,
+  .purpose-card,
+  .purpose-linchpin {
+    padding: 0.86rem 0.84rem;
+  }
+  .purpose-stack {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .purpose-quote {
+    font-size: 1.08rem;
   }
   .timeline-nav {
     padding-left: 1.1rem;
