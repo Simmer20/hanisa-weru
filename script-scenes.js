@@ -119,16 +119,6 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
   const clouds = new THREE.Mesh(cloudGeo, cloudMat);
   group.add(clouds);
 
-  const wireGeo = new THREE.SphereGeometry(radius * 1.005, 28, 28);
-  const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xB68D40,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.09,
-  });
-  const wire = new THREE.Mesh(wireGeo, wireMat);
-  group.add(wire);
-
   const glowGeo = new THREE.SphereGeometry(radius * 1.065, 42, 42);
   const glowMat = new THREE.MeshPhongMaterial({
     color: 0x5B8DBF,
@@ -220,6 +210,7 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
   const nodeMeshes = [];
   const pulseOffsets = [];
   const nodeGeo = new THREE.SphereGeometry(0.09, 12, 12);
+  const kenyaLinkMeshes = [];
   const heatmapMeshes = [];
   const nodeIndex = new Map();
   let activeRegion = null;
@@ -254,6 +245,45 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
       )
     );
   });
+
+  const kenyaNode = nodeIndex.get('Kenya');
+  if (kenyaNode) {
+    markets
+      .filter((market) => market.name !== 'Kenya')
+      .forEach((market, i) => {
+        const targetNode = nodeIndex.get(market.name);
+        if (!targetNode) return;
+
+        const start = kenyaNode.position.clone();
+        const end = targetNode.position.clone();
+        const mid = start
+          .clone()
+          .add(end)
+          .multiplyScalar(0.5)
+          .normalize()
+          .multiplyScalar(radius + 1.1 + (i % 4) * 0.08);
+
+        const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+        const curvePoints = curve.getPoints(72);
+        const curveGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
+        const curveColor = regionColors[market.region] || 0xD4B06A;
+        const curveLine = new THREE.Line(
+          curveGeo,
+          new THREE.LineBasicMaterial({
+            color: curveColor,
+            transparent: true,
+            opacity: 0.34,
+          })
+        );
+
+        curveLine.userData = {
+          region: market.region,
+          pulseOffset: i * 0.37,
+        };
+        group.add(curveLine);
+        kenyaLinkMeshes.push(curveLine);
+      });
+  }
 
   const hotspotDefs = [
     { name: 'Kenya', intensity: 1.0, tint: 0xFF4D4D },
@@ -433,6 +463,17 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
       heat.core.scale.set(0.95 + pulse * 0.22, 0.95 + pulse * 0.22, 1);
       heat.ring.material.opacity = selected ? 0.38 : 0.11;
       heat.core.material.opacity = selected ? 0.62 : 0.22;
+    });
+
+    kenyaLinkMeshes.forEach((line) => {
+      const pulse = 0.1 + Math.sin(t * 2.2 + line.userData.pulseOffset) * 0.08;
+      if (!activeRegion) {
+        line.material.opacity = 0.34 + pulse;
+        return;
+      }
+
+      const selected = line.userData.region === activeRegion || activeRegion === 'Africa';
+      line.material.opacity = selected ? 0.5 + pulse : 0.08;
     });
 
     camera.position.z += (targetCameraZ - camera.position.z) * 0.09;
