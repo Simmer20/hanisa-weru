@@ -8,7 +8,22 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
 
 // ---------- HERO GLOBE (Three.js) ----------
 (function initHeroGlobe() {
-  const container = document.getElementById('hero-3d');
+  let container = document.getElementById('hero-3d');
+  if (!container) {
+    const heroVisual = document.querySelector('#hero .hero-visual');
+    if (heroVisual) {
+      // Restore globe mount point for older hero markup that omitted #hero-3d.
+      container = document.createElement('div');
+      container.id = 'hero-3d';
+      container.setAttribute('aria-label', 'Interactive globe showing priority markets');
+      const coverageGrid = heroVisual.querySelector('.coverage-grid');
+      if (coverageGrid) {
+        heroVisual.insertBefore(container, coverageGrid);
+      } else {
+        heroVisual.appendChild(container);
+      }
+    }
+  }
   if (!container) return;
   const width = container.clientWidth;
   const height = container.clientHeight;
