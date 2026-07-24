@@ -50,14 +50,7 @@
         'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
       ]);
 
-      const globeLoaded = await loadScriptWithFallback([
-        'js/vendor/globe.gl.min.js',
-        'https://unpkg.com/globe.gl@2.32.0/dist/globe.gl.min.js',
-        'https://cdn.jsdelivr.net/npm/globe.gl@2.32.0/dist/globe.gl.min.js',
-      ]);
-
-      if (threeLoaded && globeLoaded) {
-        await loadScript('js/map.js');
+      if (threeLoaded) {
         await loadScript('script-scenes.js');
       }
 
