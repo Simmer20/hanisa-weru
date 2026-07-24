@@ -1578,6 +1578,27 @@ section {
   background: white;
 }
 
+/* ---------- ECOSYSTEM CONVERGENCE ---------- */
+#network-3d-section {
+  background: var(--navy);
+  color: white;
+  padding: 60px 0;
+}
+
+.network-text {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.network-text h2 {
+  color: white;
+}
+
+.network-text .subhead {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* ---------- CTA FINAL (three.js particle) ---------- */
 #cta-3d-section {
   background: var(--gold);
