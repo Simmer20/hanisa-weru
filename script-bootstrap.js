@@ -43,10 +43,17 @@
 
       await loadScript('script-interactions.js');
 
+      await loadScriptWithFallback([
+        'https://cdn.jsdelivr.net/npm/globe.gl@2.32.0/dist/globe.gl.min.js',
+        'https://unpkg.com/globe.gl@2.32.0/dist/globe.gl.min.js',
+      ]);
+      await loadScript('js/map.js');
+
       const threeLoaded = await loadScriptWithFallback([
-        'js/vendor/three-152.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r149/three.min.js',
+        'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js',
+        'js/vendor/three-149.min.js',
         'js/vendor/three.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
       ]);
 

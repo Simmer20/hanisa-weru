@@ -2,6 +2,7 @@ function initWorldGlobe() {
   const mapEl = document.getElementById('worldMap');
   if (!mapEl || typeof Globe === 'undefined' || mapEl.dataset.globeReady === '1') return false;
   mapEl.dataset.globeReady = '1';
+  mapEl.style.background = 'radial-gradient(circle at 30% 20%, rgba(18, 46, 82, 0.32), rgba(9, 20, 34, 0.98) 56%)';
 
   const isMobile = window.matchMedia('(max-width: 700px)').matches;
 
@@ -13,7 +14,7 @@ function initWorldGlobe() {
   ];
 
   const nairobi = hubs[0];
-  const routes = hubs.slice(1).map(hub => ({
+  const routes = hubs.slice(1).map((hub) => ({
     startLat: nairobi.lat,
     startLng: nairobi.lng,
     endLat: hub.lat,
@@ -30,7 +31,7 @@ function initWorldGlobe() {
     .pointLng('lng')
     .pointColor('color')
     .pointAltitude(0.013)
-    .pointRadius(isMobile ? 0.28 : 0.22)
+    .pointRadius(isMobile ? 0.3 : 0.24)
     .pointLabel(d => '<b>' + d.name + '</b><br/>' + d.region + ' Hub')
     .arcsData(routes)
     .arcStartLat('startLat')
@@ -38,31 +39,49 @@ function initWorldGlobe() {
     .arcEndLat('endLat')
     .arcEndLng('endLng')
     .arcColor('color')
-    .arcDashLength(isMobile ? 0.38 : 0.45)
-    .arcDashGap(isMobile ? 0.28 : 0.35)
-    .arcDashAnimateTime(isMobile ? 2800 : 2400)
-    .atmosphereColor('#9CC7EE')
-    .atmosphereAltitude(0.22)
+    .arcAltitude(0.3)
+    .arcStroke(isMobile ? 0.65 : 0.8)
+    .arcDashLength(0.6)
+    .arcDashGap(0.18)
+    .arcDashInitialGap(() => Math.random())
+    .arcDashAnimateTime(isMobile ? 2100 : 1700)
+    .arcsTransitionDuration(0)
+    .atmosphereColor('#5E93C3')
+    .atmosphereAltitude(0.16)
     .showAtmosphere(true);
 
   const globeMaterial = globe.globeMaterial();
-  if (globeMaterial && typeof THREE !== 'undefined') {
-    globeMaterial.color = new THREE.Color('#C8E0F4');
-    globeMaterial.emissive = new THREE.Color('#2F6EA0');
-    globeMaterial.emissiveIntensity = 0.2;
-    globeMaterial.shininess = 0.6;
+  if (globeMaterial) {
+    globeMaterial.color.set('#C8DDF0');
+    globeMaterial.emissive.set('#214F7A');
+    globeMaterial.emissiveIntensity = 0.1;
+    globeMaterial.shininess = 18;
+    globeMaterial.depthWrite = true;
+    globeMaterial.transparent = false;
+    globeMaterial.opacity = 1;
   }
 
   globe.width(mapEl.clientWidth);
   globe.height(mapEl.clientHeight);
-  globe.pointOfView({ lat: 9, lng: 16, altitude: isMobile ? 2.35 : 2.15 });
+  globe.pointOfView({ lat: 12, lng: 12, altitude: isMobile ? 2.3 : 2.08 });
 
   const controls = globe.controls();
   controls.autoRotate = true;
-  controls.autoRotateSpeed = isMobile ? 0.32 : 0.45;
+  controls.autoRotateSpeed = isMobile ? 0.28 : 0.38;
+  controls.enableRotate = true;
+  controls.enableZoom = true;
   controls.enablePan = false;
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.09;
+  controls.rotateSpeed = isMobile ? 0.75 : 0.9;
   controls.minDistance = isMobile ? 175 : 145;
   controls.maxDistance = isMobile ? 420 : 360;
+  controls.minPolarAngle = Math.PI / 3.3;
+  controls.maxPolarAngle = Math.PI - Math.PI / 3.3;
+
+  mapEl.addEventListener('pointerdown', () => {
+    controls.autoRotate = false;
+  }, { once: true });
 
   window.addEventListener('resize', () => {
     globe.width(mapEl.clientWidth);

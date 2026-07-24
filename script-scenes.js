@@ -8,6 +8,8 @@ const HERO_BG_DARK = window.HERO_BG_DARK;
 
 // ---------- HERO GLOBE (Three.js) ----------
 (function initHeroGlobe() {
+  if (document.getElementById('worldMap')) return;
+
   let container = document.getElementById('hero-3d');
   if (!container) {
     const heroVisual = document.querySelector('#hero .hero-visual');
